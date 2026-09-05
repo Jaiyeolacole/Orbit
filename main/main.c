@@ -8,6 +8,10 @@
 #include "esp_log.h"
 #include "esp_err.h"
 
+
+#include "OpenAI.h"
+
+
 static const char *TAG = "orbit";
 
 esp_err_t start_wifi()
