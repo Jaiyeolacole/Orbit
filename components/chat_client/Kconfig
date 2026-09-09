@@ -1,0 +1,86 @@
+menu "OpenAI Chat Client Configuration"
+
+    config OPENAI_API_KEY
+        string "OpenAI API key"
+        default "sk - proj - JHXwiyvGbcpzF_hq2X8duXQdrifuqDRpe - B6azOpv_O5J05RyndMUjkyvPu826NSjNxmtg3wykT3BlbkFJSPUHapnmJADFy3KWJHYeuDgboO_nnRQAFV6ncP9iHO3_ - OxiLuNWu8GudtahagR8Gv6I05CSgA"
+        help
+            Your OpenAI API key (https://platform.openai.com/api-keys).
+            Required - chat_client_init() fails if this is left empty.
+            For real deployments, set this via a local (git-ignored)
+            sdkconfig rather than committing it to version control.
+
+    config OPENAI_BASE_URL
+        string "OpenAI API base URL override (leave empty for default)"
+        default ""
+        help
+            Override the API base URL, e.g. to point at an OpenAI-compatible
+            proxy or self-hosted endpoint. Leave empty to use the OpenAI
+            component's built-in default (api.openai.com).
+
+    config OPENAI_MODEL
+        string "Chat model"
+        default "gpt-4o-mini"
+        help
+            Model name passed to setModel(), e.g. gpt-4o-mini, gpt-4.1,
+            gpt-3.5-turbo.
+
+    config OPENAI_SYSTEM_PROMPT
+        string "System prompt"
+        default "You are a helpful assistant running on an ESP32."
+        help
+            System prompt sent once via setSystem() and kept for the life
+            of the chat completion object.
+
+    config OPENAI_MAX_TOKENS
+        int "Max response tokens"
+        default 256
+        range 1 4096
+
+    config OPENAI_TEMPERATURE
+        int "Temperature x100"
+        default 70
+        range 0 200
+        help
+            Sampling temperature multiplied by 100 (Kconfig has no float
+            type). 70 -> 0.70. Divided back to a float in chat_client.c
+            before calling setTemperature().
+
+    config OPENAI_TOP_P
+        int "Top-p x100"
+        default 100
+        range 0 100
+        help
+            Nucleus sampling probability mass multiplied by 100.
+            100 -> 1.0.
+
+    config OPENAI_PRESENCE_PENALTY
+        int "Presence penalty x100"
+        default 0
+        range -200 200
+        help
+            OpenAI accepts -2.0..2.0; this is that value multiplied by 100.
+
+    config OPENAI_FREQUENCY_PENALTY
+        int "Frequency penalty x100"
+        default 0
+        range -200 200
+        help
+            OpenAI accepts -2.0..2.0; this is that value multiplied by 100.
+
+    config OPENAI_USER_ID
+        string "User identifier sent to OpenAI"
+        default "esp32-user"
+        help
+            Passed to setUser(); helps OpenAI's abuse-monitoring tools
+            distinguish end users.
+
+    config OPENAI_SAVE_HISTORY
+        bool "Keep conversation history between messages"
+        default y
+        help
+            When enabled, each chat_client_send() call passes save=true to
+            message(), so prior turns stay in context for follow-up
+            questions. Uses more RAM/bandwidth per turn as the conversation
+            grows; call chat_client_reset_conversation() to clear it.
+
+endmenu

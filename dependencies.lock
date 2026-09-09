@@ -42,6 +42,6 @@ direct_dependencies:
 - espressif/cmake_utilities
 - espressif/openai
 - idf
-manifest_hash: fd608abb2c4cc4aa94b30c6beaf4e261dfe1bc5fd320846521306334de5c9931
+manifest_hash: 49c00e9181d6e1032668aa6a841a9e664b26a84a59188907430e43031e52efad
 target: esp32
 version: 3.0.0

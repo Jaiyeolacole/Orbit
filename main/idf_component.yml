@@ -1,0 +1,5 @@
+dependencies:
+  idf: ">=6.0.1"
+  espressif/openai: "==1.1.0"
+  espressif/cmake_utilities: "*"
+  espressif/cjson: "*"

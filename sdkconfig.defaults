@@ -1,0 +1,8 @@
+# Defaults applied the first time this project is configured.
+# Override any of these with `idf.py menuconfig` - your choices are then
+# stored in sdkconfig (not this file).
+
+# The chat REPL in main.c reads from stdin, which is the default UART
+# console. Keep it explicit so the project builds the same way even if a
+# different IDF example changed the global default.
+CONFIG_ESP_CONSOLE_UART_DEFAULT=y

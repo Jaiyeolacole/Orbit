@@ -1,0 +1,25 @@
+menu "Wi-Fi Manager Configuration"
+
+    config WIFI_SSID
+        string "Wi-Fi SSID"
+        default "momentum"
+        help
+            SSID (network name) that the device should connect to.
+
+    config WIFI_PASSWORD
+        string "Wi-Fi Password"
+        default "iamalive"
+        help
+            WPA/WPA2 password for the SSID above. For real deployments,
+            override this via a local (git-ignored) sdkconfig rather than
+            committing real credentials here.
+
+    config WIFI_MAXIMUM_RETRY
+        int "Maximum connection retries"
+        default 5
+        range 0 20
+        help
+            Number of reconnection attempts after a disconnect before
+            wifi_manager_connect() gives up and returns ESP_FAIL.
+
+endmenu

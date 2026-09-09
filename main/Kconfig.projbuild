@@ -1,0 +1,33 @@
+menu "Chat App Configuration"
+
+    config APP_WIFI_CONNECT_TIMEOUT_MS
+        int "Wi-Fi connect timeout (milliseconds)"
+        default 15000
+        range 1000 120000
+        help
+            How long app_main() waits for wifi_manager_connect() to bring up
+            a station connection before giving up and aborting startup.
+
+    config APP_CHAT_INPUT_BUFFER_SIZE
+        int "Max characters per typed chat line"
+        default 512
+        range 32 4096
+        help
+            Size of the line buffer used to read a user's message from the
+            console (UART) before it is handed to the chat client.
+
+    config APP_TASK_STACK_SIZE
+        int "Chat task stack size (bytes)"
+        default 8192
+        range 4096 32768
+        help
+            Stack size for the FreeRTOS task that runs the chat REPL and
+            talks to the OpenAI component. The TLS client is stack-hungry;
+            don't go too low or you'll see stack canary crashes.
+
+    config APP_TASK_PRIORITY
+        int "Chat task priority"
+        default 5
+        range 1 24
+
+endmenu

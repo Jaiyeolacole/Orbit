@@ -31,5 +31,7 @@
     "--background-index",
     "--query-driver=**",
     "--compile-commands-dir=c:\\Users\\USER\\Desktop\\myproject\\ORBIT — Omni-Reasoning & Bot Intelligence Terminal\\_orbit_software\\build"
-  ]
+  ],
+  "idf.flashType": "UART",
+  "idf.portWin": "COM11"
 }
